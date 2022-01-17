@@ -47,7 +47,7 @@ def generate_unique_images(amount, config):
       if key != "tokenId":
         attributes.append({"trait_type": key, "value": token[key]})
     token_metadata = {
-        "image": config["baseURI"] + "/images/" + str(token["tokenId"]) + '.png',
+        "image": config["file"] + "/images/" + str(token["tokenId"]) + '.png',
         "tokenId": token["tokenId"],
         "name":  config["name"] + str(token["tokenId"]).zfill(pad_amount),
         "description": config["description"],
@@ -96,44 +96,14 @@ def generate_unique_images(amount, config):
     for i, token in enumerate(all_images):
       with open('./metadata/' + str(item["tokenId"]) + '.json', 'r') as infile:
         original_json = json.loads(infile.read())
-        original_json["image"] = original_json["image"].replace(config["baseURI"]+"/", cid+"/")
+        original_json["image"] = original_json["image"].replace(config["file"]+"/", cid+"/")
         with open('./metadata/' + str(item["tokenId"]) + '.json', 'w') as outfile:
           json.dump(original_json, outfile, indent=4)
 
-generate_unique_images(11, {
-  "layers": [
-    {
-      "name": "Background",
-      "values": ["Blue", "Orange", "Purple", "Red", "Yellow"],
-      "trait_path": "./trait-layers/backgrounds",
-      "filename": ["blue", "orange", "purple", "red", "yellow"],
-      "weights": [20,20,20,20,20]
-    },
-    {
-      "name": "Foreground",
-      "values": ["Python Logo", "Python Logo 32"],
-      "trait_path": "./trait-layers/foreground",
-      "filename": ["logo", "logo"],
-      "weights": [50, 50]
-    },
-    {
-      "name": "Branding",
-      "values": ["A Name", "Another Name"],
-      "trait_path": "./trait-layers/text",
-      "filename": ["text", "text"],
-      "weights": [50, 50]
-    }
-  ],
-  "incompatibilities": [
-    {
-      "layer": "Background",
-      "value": "Blue",
-      "incompatible_with": ["Python Logo 2"]
-    },  #  @dev : Blue backgrounds will never have the attribute "Python Logo 2".
-  ],
-  "baseURI": ".",
-  "name": "NFT #",
-  "description": "This is a description for this NFT series."
+generate_unique_images(131, {
+    "name": "PTH #",
+    "description": "The collection of PictoHeads, courtesy of Epiq NFT Crew",
+    "file": "ipfs://ipfs/QmVEsT2Br6Kd4gHwM5v3y267Y72DyHRsAqQXo4YW7zvduv",
 })
 
 #Additional layer objects can be added following the above formats. They will automatically be composed along with the rest of the layers as long as they are the same size as eachother.
