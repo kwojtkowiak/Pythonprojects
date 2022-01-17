@@ -19,7 +19,7 @@ for file in files:
 def generate_unique_metadata(number_of_pics, config):
     print("Generating {} unique metadata files".format(number_of_pics))
     pad_amount = len(str(number_of_pics));
-
+    #counting pictures
     i = 1
     for item in picfiles:
         item["tokenId"] = i
@@ -31,17 +31,36 @@ def generate_unique_metadata(number_of_pics, config):
             if key != "tokenId":
                 attributes.append({"trait_type": key, "value": token[key]})
         token_metadata = {
-            "image": config["baseURI"] + "/images/" + str(token["tokenId"]) + '.png',
+            "image": config["file"] + "/images/" + str(token["tokenId"]) + '.png',
             "tokenId": token["tokenId"],
             "name":  config["name"] + str(token["tokenId"]).zfill(pad_amount),
             "description": config["description"],
             "attributes": attributes
         }
+        with open('./metadata/' + str(token["tokenId"]) + '.json', 'w') as outfile:
+            json.dump(token_metadata, outfile, indent=4)
+    
+    with open('./metadata/all-objects.json', 'w') as outfile:
+        json.dump(picfiles, outfile, indent=4)
+    
+    # CID generator
+    print("\n Metadata files created. After uploading images to IPFS, please paste the CID below.\nYou may hit ENTER or CTRL+C to quit.")
+    cid = input("IPFS Image CID (): ")
+    if len(cid) > 0:
+      if not cid.startswith("ipfs://"):
+        cid = "ipfs://{}".format(cid)
+    if cid.endswith("/"):
+        cid = cid[:-1]
+    for i, token in enumerate(picfiles):
+      with open('./metadata/' + str(item["tokenId"]) + '.json', 'r') as infile:
+        original_json = json.loads(infile.read())
+        original_json["image"] = original_json["image"].replace(config["baseURI"]+"/", cid+"/")
+        with open('./metadata/' + str(item["tokenId"]) + '.json', 'w') as outfile:
+          json.dump(original_json, outfile, indent=4)
 
-#Example metadata requirements
-{
-    "name": "FAC #",
-    "description": "Collection of PictoHeads I've made.",
+generate_unique_metadata(15, {
+    "name": "TST #",
+    "description": "Test test ",
     "file": "<tu bedzie link>",
     "attributes": [
         {
@@ -53,4 +72,4 @@ def generate_unique_metadata(number_of_pics, config):
             "value": "CEO"
         }
     ]
-}
+})
