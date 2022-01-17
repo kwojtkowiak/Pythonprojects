@@ -6,7 +6,7 @@ import os.path
 os.system('cls' if os.name=='nt' else 'clear')
 
 #input directory and creaty empty list for iterating through all files in the folder
-path = "D:\GitHub\projectspython\Pythonprojects\metatada_creator\pics"
+path = "D:\GitHub\projectspython\Pythonprojects\metatada_creator\ALT\pics"
 files = os.listdir(path)
 picfiles = []
 number_of_pics = len(picfiles)
@@ -19,25 +19,15 @@ for file in files:
 def generate_unique_metadata(number_of_pics, config):
     print("Generating {} unique metadata files".format(number_of_pics))
     pad_amount = len(str(number_of_pics));
-    #counting pictures
-    i = 1
-    for item in picfiles:
-        item["tokenId"] = i
-        i += 1
 
-    for i, token in enumerate(picfiles):
-        attributes = []
-        for key in token:
-            if key != "tokenId":
-                attributes.append({"trait_type": key, "value": token[key]})
+    for i, pic in enumerate(picfiles,1): 
         token_metadata = {
-            "image": config["file"] + "/images/" + str(token["tokenId"]) + '.png',
-            "tokenId": token["tokenId"],
-            "name":  config["name"] + str(token["tokenId"]).zfill(pad_amount),
+            "image": config["file"] + "/images/" + i + '.png',
+            "name":  config["name"] + i.zfill(pad_amount),
             "description": config["description"],
             "attributes": attributes
         }
-        with open('./metadata/' + str(token["tokenId"]) + '.json', 'w') as outfile:
+        with open('./metadata/' + i + '.json', 'w') as outfile:
             json.dump(token_metadata, outfile, indent=4)
     
     with open('./metadata/all-objects.json', 'w') as outfile:
@@ -58,7 +48,7 @@ def generate_unique_metadata(number_of_pics, config):
         with open('./metadata/' + str(item["tokenId"]) + '.json', 'w') as outfile:
           json.dump(original_json, outfile, indent=4)
 
-generate_unique_metadata(15, {
+generate_unique_metadata(131, {
     "name": "TST #",
     "description": "Test test ",
     "file": "<tu bedzie link>",
