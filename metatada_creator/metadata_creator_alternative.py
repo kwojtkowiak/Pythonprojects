@@ -2,6 +2,7 @@ import json
 import os
 import os.path
 
+#don't even know what that piece of code does lol
 os.system('cls' if os.name=='nt' else 'clear')
 
 #input directory and creaty empty list for iterating through all files in the folder
@@ -10,9 +11,11 @@ files = os.listdir(path)
 picfiles = []
 number_of_pics = len(picfiles)
 
+#Creating empty list of files for future use
 for file in files:
     picfiles.append(file)
 
+#Main meat - function to generate metadata file for every single picture in dir based on information provided in config file
 def generate_unique_metadata(number_of_pics, config):
     print("Generating {} unique metadata files".format(number_of_pics))
     pad_amount = len(str(number_of_pics));
