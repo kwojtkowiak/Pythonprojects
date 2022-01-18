@@ -29,10 +29,9 @@ def generate_unique_metadata(number_of_pics, config):
             "file": config["file"]
         }
 
-        outfile = str(i) + ".json"
-        f = None
-        with open "./metadata/"
-        json.dump(token_metadata, f)
+        outfile_name = str(i) + ".json"
+        with open ("./metadata_creator/ALT/pics" + outfile_name, 'w+') as outfile_name:
+            json.dump(token_metadata, outfile_name)
         
 
 generate_unique_metadata(131, {
