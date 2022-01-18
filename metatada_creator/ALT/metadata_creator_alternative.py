@@ -6,13 +6,9 @@ import os.path
 os.system('cls' if os.name=='nt' else 'clear')
 
 #input directory and creaty empty list for iterating through all files in the folder
-path = "D:\GitHub\projectspython\Pythonprojects\metatada_creator\ALT\pics"
-files = os.listdir(path)
-picfiles = []
-
-#Creating empty list of files for future use
-for file in files:
-    picfiles.append(file)
+path = "./metatada_creator/ALT/pics"
+picfiles = os.listdir(path)
+#stworzyc filtrowanie plikow graficznych
 
 number_of_pics = len(picfiles)
 print("Number of detected files: {}".format(number_of_pics))
@@ -21,23 +17,22 @@ print("Number of detected files: {}".format(number_of_pics))
 def generate_unique_metadata(number_of_pics, config):
     print("Generating {} unique metadata files".format(number_of_pics))
     pad_amount = len(str(number_of_pics));
-
+#stworzyc druga liste i tuple z linkami do .png
     for i, pic in enumerate(picfiles,1): 
         token_metadata = {
             "name":  config["name"] + str(i).zfill(pad_amount),
             "description": config["description"],
             "file": config["file"]
         }
-
-        outfile_name = str(i) + ".json"
-        with open ("./pics/" + outfile_name, 'w+') as outfile:
+        outfile_name = pic[:-4] + ".json"
+        with open ("./metatada_creator/ALT/pics/" + outfile_name, 'w+') as outfile:
             json.dump(token_metadata, outfile)
-        
+            
 
 generate_unique_metadata(131, {
     "name": "PTH #",
     "description": "The collection of PictoHeads, courtesy to Epiq NFT",
-    "file": "<link>",
+    "file": "/ipfs/QmSkMeKsFrQ6K7p8W43FcMHa4ji4sEpmcpbF3qqoSuSwZU",
 })
 
 print("Operation succesful")
