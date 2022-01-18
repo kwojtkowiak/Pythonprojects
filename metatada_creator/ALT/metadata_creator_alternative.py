@@ -9,12 +9,13 @@ os.system('cls' if os.name=='nt' else 'clear')
 path = "D:\GitHub\projectspython\Pythonprojects\metatada_creator\ALT\pics"
 files = os.listdir(path)
 picfiles = []
-number_of_pics = len(picfiles)
 
 #Creating empty list of files for future use
 for file in files:
     picfiles.append(file)
 
+number_of_pics = len(picfiles)
+print("Number of detected files: {}".format(number_of_pics))
 #Main meat - function to generate metadata file for every single picture in dir based on information provided in config object
 def generate_unique_metadata(number_of_pics, config):
     print("Generating {} unique metadata files".format(number_of_pics))
