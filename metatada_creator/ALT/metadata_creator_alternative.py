@@ -31,14 +31,9 @@ def generate_unique_metadata(number_of_pics, config):
 
         outfile = str(i) + ".json"
         f = None
-        # checks if the files does NOT exist or if the file is empty
-        if not os.path.isfile(outfile) or os.stat(outfile).st_size == 0:
-            f = open(outfile, "w")
-            json.dump(token_metadata, f)
-        if not f: #open the file that exists now
-            f = open(outfile)
-            json.load(f)
-        f.close() #close the file that was opened in either case
+        with open "./metadata/"
+        json.dump(token_metadata, f)
+        
 
 generate_unique_metadata(131, {
     "name": "PTH #",
