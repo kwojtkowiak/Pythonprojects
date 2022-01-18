@@ -22,44 +22,20 @@ def generate_unique_metadata(number_of_pics, config):
 
     for i, pic in enumerate(picfiles,1): 
         token_metadata = {
-            "image": config["file"] + "/images/" + i + '.png',
-            "name":  config["name"] + i.zfill(pad_amount),
+            "name":  config["name"] + str(i).zfill(pad_amount),
             "description": config["description"],
-            "attributes": attributes
+            "file": config["file"]
         }
-        with open('./metadata/' + i + '.json', 'w') as outfile:
+        with open('./metadata/' + str(i) + '.json', 'w') as outfile:
             json.dump(token_metadata, outfile, indent=4)
     
     with open('./metadata/all-objects.json', 'w') as outfile:
         json.dump(picfiles, outfile, indent=4)
-    
-    # CID generator
-    print("\n Metadata files created. After uploading images to IPFS, please paste the CID below.\nYou may hit ENTER or CTRL+C to quit.")
-    cid = input("IPFS Image CID (): ")
-    if len(cid) > 0:
-      if not cid.startswith("ipfs://"):
-        cid = "ipfs://{}".format(cid)
-    if cid.endswith("/"):
-        cid = cid[:-1]
-    for i, token in enumerate(picfiles):
-      with open('./metadata/' + str(item["tokenId"]) + '.json', 'r') as infile:
-        original_json = json.loads(infile.read())
-        original_json["image"] = original_json["image"].replace(config["baseURI"]+"/", cid+"/")
-        with open('./metadata/' + str(item["tokenId"]) + '.json', 'w') as outfile:
-          json.dump(original_json, outfile, indent=4)
 
 generate_unique_metadata(131, {
-    "name": "TST #",
-    "description": "Test test ",
-    "file": "<tu bedzie link>",
-    "attributes": [
-        {
-            "type": "rarity",
-            "value": "super rare"
-        },
-        {
-            "type": "title",
-            "value": "CEO"
-        }
-    ]
+    "name": "PTH #",
+    "description": "The collection of PictoHeads, courtesy to Epiq NFT",
+    "file": "<link>",
 })
+
+print("Operation succesful")
