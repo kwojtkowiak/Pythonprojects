@@ -6,7 +6,7 @@ import os.path
 os.system('cls' if os.name=='nt' else 'clear')
 
 #input directory and creaty empty list for iterating through all files in the folder
-path = "./metatada_creator/ALT/pics"
+path = "./metatada_creator/pics"
 picfiles = os.listdir(path)
 #stworzyc filtrowanie plikow graficznych
 
