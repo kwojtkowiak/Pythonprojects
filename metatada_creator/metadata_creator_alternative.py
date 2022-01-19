@@ -5,10 +5,10 @@ import os.path
 #don't even know what that piece of code does lol
 os.system('cls' if os.name=='nt' else 'clear')
 
-#input directory and creaty empty list for iterating through all files in the folder
-path = "./metatada_creator/pics"
-picfiles = os.listdir(path)
-#stworzyc filtrowanie plikow graficznych
+#input directory and creaty empty list for iterating through all files in the folder and filtering .png files (easily adjustable to other types)
+dir_with_files = "./metatada_creator/pics"
+picfiles=[f for f in sorted(os.listdir(dir_with_files)) if (str(f))[-3:] == "png"]
+picfiles_with_path=[dir_with_files+'/'+str(f) for f in picfiles]  
 
 number_of_pics = len(picfiles)
 print("Number of detected files: {}".format(number_of_pics))
