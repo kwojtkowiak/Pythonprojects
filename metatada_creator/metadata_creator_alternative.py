@@ -18,14 +18,15 @@ def generate_unique_metadata(number_of_pics, config):
     print("Generating {} unique metadata files".format(number_of_pics))
     pad_amount = len(str(number_of_pics));
 #stworzyc druga liste i tuple z linkami do .png
-    for i, pic in enumerate(picfiles,1): 
+    for i, pic in enumerate(picfiles,1):
+        outfile_name = pic[:-4] 
         token_metadata = {
             "name":  config["name"] + str(i).zfill(pad_amount),
             "description": config["description"],
-            "file": config["file"]
+            "file": config["file"],
+            "attributes": [{"type":"name","value":outfile_name}]
         }
-        outfile_name = pic[:-4] + ".json"
-        with open ("./metatada_creator/pics/" + outfile_name, 'w+') as outfile:
+        with open ("./metatada_creator/pics/" + outfile_name + ".json", 'w+') as outfile:
             json.dump(token_metadata, outfile)
             
 
