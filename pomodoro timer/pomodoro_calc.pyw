@@ -12,7 +12,7 @@ pomodoro_t = 25*60 #pomodoro duration in secs (25 mins)
 delta_t = datetime.timedelta(0,pomodoro_t) #time duration
 fut_t = ct + delta_t #future time when pomodoro finishes
 break_t = 5*60 #break time after pomodoro, 5 mins
-finished_t = ct + datetime.datetime(0,pomodoro_t + break_t) #final time with 5 min break  
+finished_t = ct + datetime.timedelta(0,pomodoro_t + break_t) #final time with 5 min break  
 
 #GUI
 root = tkinter.Tk() #hiding tkinter's main window. Only alert message box
