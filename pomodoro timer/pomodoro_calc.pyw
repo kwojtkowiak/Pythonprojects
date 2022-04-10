@@ -18,7 +18,7 @@ finished_t = ct + datetime.timedelta(0,pomodoro_t + break_t) #final time with 5 
 root = tkinter.Tk() #hiding tkinter's main window. Only alert message box
 root.withdraw()
 
-messagebox.showinfo("Pomodoro started!", "\nIt is now " +ct.strftime("%H:%M") + " hrs. \nTimer set for 25 mins.")
+messagebox.showinfo("Pomodoro started!", "\nIt is now " +ct.strftime("%H:%M") + "\nTimer set for 25 mins." + "\nTry to keep working to " + fut_t.strftime("%H:%M"))
 
 total_pomodoros = 0
 breaks = 0 #counters 
